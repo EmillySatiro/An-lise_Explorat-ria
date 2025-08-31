@@ -3,3 +3,4 @@ pip install kaggle
 pip install matplotlib
 pip install seaborn
 pip install sklearn
+pip install pandas openpyxl
