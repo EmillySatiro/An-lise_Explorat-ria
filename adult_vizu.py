@@ -22,6 +22,15 @@ adult_df['Sexo'] = adult_df['Sexo'].replace(
 adult_df['Renda'] = adult_df['Renda'].replace(
     {'>50K': 'Acima de 50K', '<=50K': 'Até 50K'})
 
+# Calcular % de zeros no Ganho_de_Capital
+percent_ganho_zero = (adult_df['Ganho_de_Capital'] == 0).mean() * 100
+
+# Calcular % de zeros na Perda_de_Capital
+percent_perda_zero = (adult_df['Perda_de_Capital'] == 0).mean() * 100
+
+print(f"% de zeros em Ganho_de_Capital: {percent_ganho_zero:.2f}%")
+print(f"% de zeros em Perda_de_Capital: {percent_perda_zero:.2f}%")
+
 quantidade_pessoas = len(adult_df)
 elementos_unicos = []
 for col in adult_df.columns:
