@@ -2,7 +2,6 @@ import pandas as pd
 
 titanic_df = pd.read_csv("Bases/Titanic-Dataset.csv")
 
-
 titanic_df.rename(columns={
     'PassengerId': 'ID_Passageiro',
     'Survived': 'Sobreviveu',
@@ -39,13 +38,11 @@ titanic_sem_outliers = titanic_df[
 # Boxplot de idade sem separar por sexo e sem outliers, apenas para quem respondeu
 plt.figure(figsize=(6,6))
 titanic_sem_outliers['Idade'].dropna().to_frame().boxplot(column='Idade')
-plt.title('Boxplot da Idade (Sem Outliers)')
+plt.title('Idade Passageiros')
 plt.suptitle('')
 plt.ylabel('Idade')
 plt.tight_layout()
 plt.show()
-
-
 
 
 # Tratamento dos valores pagos pelo pessoal da primeira classe
@@ -70,7 +67,7 @@ print(valores_primeira_classe_sem_outliers)
 # Boxplot dos valores pagos pelo pessoal da primeira classe (em euro, sem outliers)
 plt.figure(figsize=(6,6))
 plt.boxplot(valores_primeira_classe_sem_outliers)
-plt.title('Boxplot da Tarifa (€) - Primeira Classe (Sem Outliers)')
+plt.title('Boxplot da Tarifa (€) - Primeira Classe')
 plt.ylabel('Tarifa (€)')
 plt.tight_layout()
 plt.show()
@@ -88,12 +85,10 @@ plt.show()
 
 
 
-
-
 # Gráfico de barras: Sobreviventes por classe e sexo
 sobreviventes_classe_sexo = titanic_df[titanic_df['Sobreviveu'] == 1].groupby(['Classe', 'Sexo']).size().unstack(fill_value=0)
 
-print("Quantidade de sobreviventes por classe e sexo:")
+print("Sobreviventes por classe e sexo:")
 print(sobreviventes_classe_sexo)
 
 sobreviventes_classe_sexo.plot(kind='bar', figsize=(8,6))
@@ -104,6 +99,14 @@ plt.legend(title='Sexo')
 plt.tight_layout()
 plt.show()
 
+# Gráfico de barras: Quantidade de pessoas por classe
+quantidade_por_classe = titanic_df['Classe'].value_counts().sort_index()
+quantidade_por_classe.plot(kind='bar', color='teal')
+plt.title('Quantidade de Pessoas por Classe')
+plt.xlabel('Classe')
+plt.ylabel('Quantidade de Passageiros')
+plt.tight_layout()
+plt.show()
 
 # Gráfico de barras: Não sobreviventes por classe e sexo
 nao_sobreviventes_classe_sexo = titanic_df[titanic_df['Sobreviveu'] == 0].groupby(['Classe', 'Sexo']).size().unstack(fill_value=0)
@@ -120,7 +123,6 @@ plt.ylabel('Número de Não Sobreviventes')
 plt.legend(title='Sexo')
 plt.tight_layout()
 plt.show()
-
 
 # Gráfico de barras: Quantidade de pessoas para cada prefixo do bilhete
 
